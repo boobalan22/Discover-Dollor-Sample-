@@ -5,8 +5,8 @@ pipeline {
             steps {
                 dir('backend') {
                     sh """
-                        docker rmi -f boobu/dd_mean_backend || true
-                        docker build -t boobu/dd_mean_backend .
+                        docker rmi -f boobu/backend-mean || true
+                        docker build -t boobu/backend-mean .
                     """
                 }
             }
@@ -15,8 +15,8 @@ pipeline {
             steps {
                 dir('frontend') {
                     sh """
-                        docker rmi -f boobu/dd_mean_frontend || true
-                        docker build -t boobu/dd_mean_frontend .
+                        docker rmi -f boobu/frontend-mean || true
+                        docker build -t boobu/frontend-mean .
                     """
                 }
             }
@@ -28,12 +28,12 @@ pipeline {
                         echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
 
                         cd frontend
-                        docker push $DOCKER_USER/dd_mean_frontend
+                        docker push $DOCKER_USER/frontend-mean
                         cd ..
 
                         
                         cd backend
-                        docker push $DOCKER_USER/dd_mean_backend
+                        docker push $DOCKER_USER/backend-mean
                         cd ..
 
                         docker logout
