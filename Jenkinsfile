@@ -23,17 +23,14 @@ pipeline {
             }
         }
 
-        stage("Tag & Push Images to Docker Hub") { 
+        stage("Push the Images to Docker Hub") { 
             steps {
                 withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
                     sh """
                         echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
                         
-                        docker tag frontend-mean $DOCKER_USER/frontend-mean:latest
-                        docker tag backend-mean $DOCKER_USER/backend-mean:latest
-
-                        docker push $DOCKER_USER/frontend-mean:latest
-                        docker push $DOCKER_USER/backend-mean:latest
+                        docker push $DOCKER_USER/frontend-mean
+                        docker push $DOCKER_USER/backend-mean
 
                         docker logout
                     """
