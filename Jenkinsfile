@@ -5,8 +5,8 @@ pipeline {
             steps {
                 dir('backend') {
                     sh """
-                        docker rmi -f shrsyc/dd_mean_backend || true
-                        docker build -t shrsyc/dd_mean_backend .
+                        docker rmi -f boobu/dd_mean_backend || true
+                        docker build -t boobu/dd_mean_backend .
                     """
                 }
             }
@@ -15,8 +15,8 @@ pipeline {
             steps {
                 dir('frontend') {
                     sh """
-                        docker rmi -f shrsyc/dd_mean_frontend || true
-                        docker build -t shrsyc/dd_mean_frontend .
+                        docker rmi -f boobu/dd_mean_frontend || true
+                        docker build -t boobu/dd_mean_frontend .
                     """
                 }
             }
