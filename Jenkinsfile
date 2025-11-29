@@ -29,8 +29,8 @@ pipeline {
                     sh """
                         echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
                         
-                        docker push $DOCKER_USER/frontend-mean
-                        docker push $DOCKER_USER/backend-mean
+                        docker push $DOCKER_USER/frontend-mean:latest
+                        docker push $DOCKER_USER/backend-mean:latest
 
                         docker logout
                     """
