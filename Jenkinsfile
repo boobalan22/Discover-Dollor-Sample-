@@ -5,8 +5,8 @@ pipeline {
             steps {
                 dir('backend') {
                     sh """
-                        docker rmi -f backend-mean || true
-                        docker build -t backend-mean .
+                        docker rmi -f boobu/backend-mean || true
+                        docker build -t boobu/backend-mean .
                     """
                 }
             }
@@ -16,8 +16,8 @@ pipeline {
             steps {
                 dir('frontend') {
                     sh """
-                        docker rmi -f frontend-mean || true
-                        docker build -t frontend-mean .
+                        docker rmi -f boobu/frontend-mean || true
+                        docker build -t boobu/frontend-mean .
                     """
                 }
             }
@@ -28,9 +28,9 @@ pipeline {
                 withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
                     sh """
                         echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
-                        
-                        docker push $DOCKER_USER/frontend-mean:latest
-                        docker push $DOCKER_USER/backend-mean:latest
+
+                        docker push $DOCKER_USER/frontend-mean
+                        docker push $DOCKER_USER/backend-mean
 
                         docker logout
                     """
