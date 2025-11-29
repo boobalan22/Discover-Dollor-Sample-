@@ -10,16 +10,16 @@ services:
       - mongo-data:/data/db
 
   backend:
-    image: shrsyc/dd_mean_backend
+    image: boobu/backend-mean
     ports:
-      - "8081:8081"
+      - "8080:8080"
     depends_on:
       - mongo
     environment:
       - MONGO_URL=mongodb://mongo:27017/dd_db
 
   frontend:
-    image: shrsyc/dd_mean_frontend
+    image: boobu/frontend-mean
     ports:
       - "80:80"
     depends_on:
